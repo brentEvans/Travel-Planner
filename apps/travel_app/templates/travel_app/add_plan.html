@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar navbar-light bg-light border">
+            <div class="navbar-brand mb-0 h1 ">Travel Plans</div>
+            <div><a href="/travels">Home</a></div> 
+            <div class="float-right"><a href="/logout">Logout!</a></div>
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+            <p class="text-danger text-center">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <h1>Add a Trip</h1>
+        <form action="/travels/add/validate/" method="POST"> 
+        {% csrf_token %}
+            <p>Destination: <input type="text" name="destination"></p>
+            <p>Description: <input type="text" name="plan"></p>
+            <p>Travel Date From: <input type="date" name="travel_start_date"></p>
+            <p>Travel Date To: <input type="date" name="travel_end_date"></p>
+            <input type="submit" value="Add" class="btn btn-warning">
+        </form>
+    </div>
+</body>
+</html>
+
+

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar navbar-light bg-light border">
+            <div class="navbar-brand mb-0 h1 ">Travel Plans</div>
+            <div><a href="/travels">Home</a></div> 
+            <div class="float-right"><a href="/logout">Logout!</a></div>
+        </div>
+        <div class="row">
+            <div class="card col-6">
+                <h1>{{ this_trip.destination }}</h1>
+                <p class="ml-3">Planned by: {{ this_trip.planned_by.name }}</p>
+                <p class="ml-3">Description: {{ this_trip.plan }}</p>
+                <p class="ml-3">Travel Date From: {{ this_trip.travel_start_date }}</p>
+                <p class="ml-3">Travel Date To: {{ this_trip.travel_end_date }}</p>
+            </div>
+            <div class="card col-6">
+                <h3>Other Users Joining this Trip:</h3>
+                {% for user in this_trip_users %}
+                {% if user != this_trip_planner %}
+                    <p class="ml-3">{{ user.name }}</p>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
