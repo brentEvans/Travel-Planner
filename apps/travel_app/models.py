@@ -45,7 +45,7 @@ class TripManager(models.Manager):
         if start_date < str(now) or end_date < str(now):
             errors['dates_in_past'] = 'Your trip dates must be in the future!'
         if end_date < start_date:
-            errors['dates'] = 'The end of your trip cannot be dated prior to the start of your trip!'
+            errors['dates'] = 'The end of your trip cannot be prior to the start of your trip!'
         return errors
 
 class User(models.Model):

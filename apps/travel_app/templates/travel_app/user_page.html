@@ -5,17 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'travel_app/css/style.css' %}"> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Markazi+Text|Tangerine" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <div class="navbar navbar-light bg-light border">
-            <div class="navbar-brand mb-0 h1 ">Travel Plans</div>
+
+        <div class="Menu navbar navbar-light">
+            <div class="mb-0">Travel Planner</div>
             <div class="float-right"><a href="/logout">Logout!</a></div>
         </div>
-        <h1>Hello, {{ request.session.logged_in_user_name }}!</h1>
-        <p>Your Trip Schedules:</p>
-        <table class="table border">
+        <h1 class="Heading mt-3">Hello, {{ request.session.logged_in_user_name }}!</h1>
+        <p class="Markazi-md">Your Trip Schedules:</p>
+        <table class="Trip-table table border">
             <tr>
                 <th>Destination</th>
                 <th>Travel Start Date</th>
@@ -31,8 +35,8 @@
             </tr>
             {% endfor %}
         </table>
-        <p>Other User's Travel Plans:</p>
-        <table class="table border">
+        <p class="Markazi-md">Other Users' Travel Plans:</p>
+        <table class="Trip-table table border">
             <tr>
                 <th>Name</th>
                 <th>Destination</th>
@@ -50,7 +54,9 @@
             </tr>
             {% endfor %}
         </table>
-        <a class="float-right" href="/travels/add/">Add Travel Plan</a> 
+        <div class="text-center"><a class="Markazi-md" href="/travels/add/">Add Travel Plan!</a></div> 
+
+
     </div>
 </body>
 </html>

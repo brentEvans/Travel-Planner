@@ -5,32 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'travel_app/css/style.css' %}"> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Markazi+Text|Tangerine" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <div class="navbar navbar-light bg-light border">
-            <div class="navbar-brand mb-0 h1 ">Travel Plans</div>
+        <div class="Menu navbar navbar-light">
+            <div class="mb-0">Travel Planner</div>
         </div>
-        {% if messages %}
+        {% if messages %} 
             {% for message in messages %}
             <p class="text-danger text-center">{{ message }}</p>
             {% endfor %}
         {% endif %}
-        <h1 class="text-center">Welcome!</h1>
+        <h1 class="Header">Welcome!</h1>
+        <p class="Intro">Ready to plan your next group getaway? Register/login to get started!</p>
         <div class="row">
             <div class="col-6">
                 <div class="card">
                     <div class="card-body">
-                        <h1 class="text-center">Register</h1>
+                        <h1 class="Heading">Register</h1>
                         <form action="/register/" method="POST"> 
                         {% csrf_token %}
-                            <p>Name: <input type="text" name="name"></p>
-                            <p>Username: <input type="text" name="username"></p>
-                            <p>Password: <input type="password" name="password"></p>
-                            <p class="font-italic ml-4">*Password should be at least 8 characters</p>
-                            <p>Confirm Password: <input type="password" name="confirm_pw"></p>
-                            <input type="submit" value="Register!" class="btn btn-warning">
+                            <p class="Form-text">Name: <input class="form-control" type="text" name="name"></p>
+                            <p class="Form-text">Username: <input class="form-control" type="text" name="username"></p>
+                            <p class="Form-text">Password: <input class="form-control" type="password" name="password"></p>
+                            <p class="Form-text font-italic ml-4">*Password should be at least 8 characters</p>
+                            <p class="Form-text">Confirm Password: <input class="form-control" type="password" name="confirm_pw"></p>
+                            <div class="text-center"><input type="submit" value="Register!" class="btn btn-warning w-75" style="font: 2rem 'Markazi Text', serif"></div>
                         </form>
                     </div>
                 </div>
@@ -38,12 +42,12 @@
             <div class="col-6">
                 <div class="card">
                     <div class="card-body">
-                        <h1 class="text-center">Login</h1>
+                        <h1 class="Heading">Login</h1>
                         <form action="/login/" method="POST"> 
                         {% csrf_token %}
-                            <p>Username: <input type="text" name="username"></p>
-                            <p>Password: <input type="password" name="password"></p>
-                            <input type="submit" value="Login!" class="btn btn-warning">
+                            <p class="Form-text">Username: <input class="form-control" type="text" name="username"></p>
+                            <p class="Form-text">Password: <input class="form-control" type="password" name="password"></p>
+                            <div class="text-center"><input type="submit" value="Login!" class="btn btn-warning w-75" style="font: 2rem 'Markazi Text', serif"></div>
                         </form>
                     </div>
                 </div>

@@ -5,32 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'travel_app/css/style.css' %}"> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
+    <link href="https://fonts.googleapis.com/css?family=Markazi+Text|Tangerine" rel="stylesheet"></head>
 <body>
     <div class="container">
-        <div class="navbar navbar-light bg-light border">
-            <div class="navbar-brand mb-0 h1 ">Travel Plans</div>
-            <div><a href="/travels">Home</a></div> 
-            <div class="float-right"><a href="/logout">Logout!</a></div>
-        </div>
-        <div class="row">
-            <div class="card col-6">
-                <h1>{{ this_trip.destination }}</h1>
-                <p class="ml-3">Planned by: {{ this_trip.planned_by.name }}</p>
-                <p class="ml-3">Description: {{ this_trip.plan }}</p>
-                <p class="ml-3">Travel Date From: {{ this_trip.travel_start_date }}</p>
-                <p class="ml-3">Travel Date To: {{ this_trip.travel_end_date }}</p>
+
+            <div class="Menu navbar">
+                <div class="mb-0">Travel Planner</div>
+                <div class="mr-5"><a href="/travels">Home</a></div> 
+                <div><a href="/logout">Logout!</a></div>
             </div>
-            <div class="card col-6">
-                <h3>Other Users Joining this Trip:</h3>
-                {% for user in this_trip_users %}
-                {% if user != this_trip_planner %}
-                    <p class="ml-3">{{ user.name }}</p>
-                {% endif %}
-                {% endfor %}
+
+
+        <div class="row Dest">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="Dest-head">{{ this_trip.destination }}</h1>
+                        <p class="Markazi-sm ml-3">Planned by: <strong class="text-info">{{ this_trip.planned_by.name }}</strong></p>
+                        <p class="Markazi-sm ml-3">Description: <strong class="text-info">{{ this_trip.plan }}</strong></p>
+                        <p class="Markazi-sm ml-3">Travel Date From: <strong class="text-info">{{ this_trip.travel_start_date }}</strong></p>
+                        <p class="Markazi-sm ml-3">Travel Date To: <strong class="text-info">{{ this_trip.travel_end_date }}</strong></p>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h3 class="Dest-head-sm">Other Users Joining this Trip:</h3>
+                        {% for user in this_trip_users %}
+                        {% if user != this_trip_planner %}
+                            <p class="Markazi-sm ml-3 text-info text-center">{{ user.name }}</p>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
     </div>
 </body>
 </html>

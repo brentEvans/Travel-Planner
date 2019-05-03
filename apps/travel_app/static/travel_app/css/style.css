@@ -1,0 +1,82 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    background-color: burlywood;
+    padding: 0 1rem 1rem 1rem;
+    min-height: 500px;
+}
+
+.Menu{
+    background-color: cornsilk;
+}
+
+    .Menu div{
+        font: bold 3rem 'Markazi Text', serif;
+    }
+
+.Header{
+    text-align: center;
+    font: bold 10rem/11rem 'Tangerine', cursive;
+}
+
+.Intro{
+    text-align: center;
+    font: 3rem 'Markazi Text', serif;
+    margin: -3rem 0 1rem 0;
+}
+
+.Heading{
+    text-align: center;
+    font: bold 6rem 'Tangerine', cursive;
+}
+
+.Dest-head{
+    text-align: center;
+    font: bold 6rem 'Markazi Text', serif;
+}
+
+.Dest-head-sm{
+    text-align: center;
+    font: bold 3.1rem 'Markazi Text', serif;
+    margin: 2.5rem 0 1.6rem 0;
+}
+
+.Add-head{
+    text-align: center;
+    font: bold 4rem 'Markazi Text', serif;
+}
+
+
+
+.Form-text{
+    font: 2rem 'Markazi Text', serif;
+}
+
+.Trip-table{
+    background-color: cornsilk;
+    font: 1.5rem 'Markazi Text', serif;
+}
+
+.Markazi-md{
+    font: 3rem 'Markazi Text', serif;
+}
+
+.Markazi-sm{
+    font: 2rem 'Markazi Text', serif;
+}
+
+.Dest{
+    margin: 3rem 0;
+}
+
+div.card{
+    background-color: cornsilk;
+}
+
+.Add-form{
+    background-color: cornsilk;
+    margin: 2rem 0 0 0;
+}
