@@ -19,8 +19,13 @@
     <div class="Container">
         <div class="Menu navbar">
             <div class="Logo">Travel Planner</div>
-            <div class="mr-5"><a href="/travels">Home</a></div>
-            <div><a href="/logout">Logout!</a></div>
+            <div class="dropdown">
+                <button class="dropbtn">&#x25BC</button>
+                <div class="dropdown-content">
+                    <a href="/travels">Home</a>
+                    <a href="/logout">Logout!</a>
+                </div>
+            </div>
         </div>
 
         {% if messages %}

@@ -14,17 +14,20 @@
 </head>
 <body>
     <div class="Container">
-        <div class="Menu navbar navbar-light">
+        <div class="Menu navbar">
             <div class="Logo">Travel Planner</div>
-            <div class="float-right"><a href="/logout">Logout!</a></div>
+            <div class="dropdown">
+                <button class="dropbtn">&#x25BC</button>
+                <div class="dropdown-content">
+                    <a href="/travels">Home</a>
+                    <a href="/logout">Logout!</a>
+                </div>
+            </div>
         </div>
+
         <div id="Fade-3">
             <h1 class="Heading White mt-3">Hello, {{ request.session.logged_in_user_name }}!</h1>
-
             <p class="Markazi-md White">Your Trip Schedules:</p>
-
-
-
             <table class="Trip-table table">
                 <tr>
                     <th>Destination</th>
@@ -43,7 +46,6 @@
             </table>
 
             <br><br><div class="text-center"><a class="btn btn-warning w-50" href="/travels/add/"><div class="Markazi-md">Add Travel Plan!</div></a></div><br><br>
-
 
             <p class="Markazi-md White">Trips to Join:</p>
             <table class="Trip-table table">
