@@ -1,50 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'travel_app/css/style.css' %}"> 
+    <link rel="stylesheet" href="{% static 'travel_app/css/style.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Markazi+Text|Tangerine" rel="stylesheet"></head>
+    <link href="https://fonts.googleapis.com/css?family=Markazi+Text|Tangerine" rel="stylesheet">
+</head>
+<link
+    href="https://fonts.googleapis.com/css?family=Abril+Fatface|Anton|Archivo+Black|Bree+Serif|Fredoka+One&display=swap"
+    rel="stylesheet">
+
 <body>
-    <div class="container">
+    <div class="Container">
+        <div class="Menu navbar">
+            <div class="Logo">Travel Planner</div>
+            <div class="mr-5"><a href="/travels">Home</a></div>
+            <div><a href="/logout">Logout!</a></div>
+        </div>
 
-            <div class="Menu navbar">
-                <div class="mb-0">Travel Planner</div>
-                <div class="mr-5"><a href="/travels">Home</a></div> 
-                <div><a href="/logout">Logout!</a></div>
-            </div>
+        <!-- add dropdown to home/logout in navbar -->
+        <div id="Fade-3">
+            <div class="row Dest">
+                <div class="col-6">
+                    <div class="Shadow card">
+                        <div class="Blue Dest-col card-body">
+                            <h1 class="Dest-head">{{ this_trip.destination }}</h1>
+                            <p class="Markazi-sm ml-3">Planned by: <strong>{{ this_trip.planned_by.name }}</strong></p>
+                            <p class="Markazi-sm ml-3">Description: <strong>{{ this_trip.plan }}</strong></p>
+                            <p class="Markazi-sm ml-3">Travel Date From:
+                                <strong>{{ this_trip.travel_start_date }}</strong></p>
+                            <p class="Markazi-sm ml-3">Travel Date To: <strong>{{ this_trip.travel_end_date }}</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="Shadow card">
+                        <div class="Blue Dest-col card-body">
 
-
-        <div class="row Dest">
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="Dest-head">{{ this_trip.destination }}</h1>
-                        <p class="Markazi-sm ml-3">Planned by: <strong class="text-info">{{ this_trip.planned_by.name }}</strong></p>
-                        <p class="Markazi-sm ml-3">Description: <strong class="text-info">{{ this_trip.plan }}</strong></p>
-                        <p class="Markazi-sm ml-3">Travel Date From: <strong class="text-info">{{ this_trip.travel_start_date }}</strong></p>
-                        <p class="Markazi-sm ml-3">Travel Date To: <strong class="text-info">{{ this_trip.travel_end_date }}</strong></p>
+                            <h3 class="Dest-head-sm">Other Users Joining this Trip:</h3>
+                            {% for user in this_trip_users %}
+                            {% if user != this_trip_planner %}
+                            <p class="Markazi-sm text-center">{{ user.name }}</p>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
 
-                        <h3 class="Dest-head-sm">Other Users Joining this Trip:</h3>
-                        {% for user in this_trip_users %}
-                        {% if user != this_trip_planner %}
-                            <p class="Markazi-sm ml-3 text-info text-center">{{ user.name }}</p>
+
+
+
+            <div class="col-10 offset-1 Shadow card Comment-section">
+                <div>
+                    <h1 class="Comment-head">Joining this trip? Leave a comment below!</h1>
+
+                    <form action='/travels/destination/{{ this_trip.id }}/validate_comment' method="POST">
+                        <!-- is this link correct? -->
+                        {% csrf_token %}
+                        <p class="Form-text Markazi-sm">Message: <textarea name='body'
+                                class='form-control form-control-lg' rows='2'></textarea></p>
+                        {% if messages %}
+                        <div class="Error-bg Comment-error">
+                            {% for message in messages %}
+                                <p class="Error-message">{{ message }}</p>
+                            {% endfor %}
+                        </div>
                         {% endif %}
-                        {% endfor %}
+                        <div class="text-center"><input type="submit" value="Post Comment!"
+                                class="btn btn-warning w-75 mb-3" style="font: 2rem 'Markazi Text', serif"></div>
+                    </form>
+                </div>
+                <div class="Comments Shadow">
+                    {% for comment in this_trip_comments reversed %}
+                    <div class="Comment">
+                        <h3 class="Markazi-md">{{ comment.user.name }} says:</h3>
+                        <span class="Comment-datetime">{{ comment.created_at }}</span>
+                        <p class="Markazi-sm Comment-body">"{{ comment.body }}"</p>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
 
-    </div>
+        </div>
 </body>
+
 </html>

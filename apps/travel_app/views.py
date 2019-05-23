@@ -67,16 +67,38 @@ def validate_plan(request):
 
 def destination(request, number):
     this_trip = Trip.objects.get(id=number)
-    this_trip_planner = User.objects.get(trips_planned=this_trip)
     context = {
         'this_trip': this_trip,
         'this_trip_users': User.objects.filter(trips_joining=number), 
-        'this_trip_planner': User.objects.get(trips_planned=this_trip)
+        'this_trip_planner': User.objects.get(trips_planned=this_trip),
+        'this_trip_comments': Comment.objects.filter(trip=this_trip)
     }
     return render(request, 'travel_app/destination.html', context)
 
 def logout(request):
     request.session.clear()
     return redirect('/')
+
+
+
+
+
+def validate_comment(request, number):
+    this_user = User.objects.get(id=request.session['logged_in_user_id'])
+    this_trip = Trip.objects.get(id=number)
+    users_on_trip = User.objects.filter(trips_joining=number)
+    errors = Comment.objects.comment_validator(request.POST, this_trip, this_user, users_on_trip)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect(f'/travels/destination/{number}')    # does this work?
+    else:
+        this_comment = Comment.objects.create(body=request.POST['body'], user=this_user, trip=this_trip)
+        return redirect(f'/travels/destination/{number}')    # does this work?
+
+
+
+# TODO
+    # show comments on destination page
 
 

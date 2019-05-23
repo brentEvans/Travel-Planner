@@ -9,45 +9,53 @@
     <link rel="stylesheet" href="{% static 'travel_app/css/style.css' %}"> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Markazi+Text|Tangerine" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Anton|Archivo+Black|Bree+Serif|Fredoka+One&display=swap" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
 </head>
 <body>
-    <div class="container">
+    <div class="Container">
         <div class="Menu navbar navbar-light">
-            <div class="mb-0">Travel Planner</div>
+            <div class="Logo">Travel Planner</div>
         </div>
-        {% if messages %} 
+        {% if messages %}
+        <div class="Error-bg">
             {% for message in messages %}
-            <p class="text-danger text-center">{{ message }}</p>
+            <p class="Error-message">{{ message }}</p>
             {% endfor %}
+        </div>
         {% endif %}
-        <h1 class="Header">Welcome!</h1>
-        <p class="Intro">Ready to plan your next group getaway? Register/login to get started!</p>
-        <div class="row">
+        <h1 id="Fade" class="Header">Welcome!</h1>
+        <!-- <p id="Fade" class="Intro ">Ready to plan your next group getaway? Register/login to get started!</p> -->
+        <div id="Fade-2" class="row">
             <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
+                <div class="Shadow card">
+                    <div class="card-body">         <!-- clean classes -->
                         <h1 class="Heading">Register</h1>
                         <form action="/register/" method="POST"> 
                         {% csrf_token %}
-                            <p class="Form-text">Name: <input class="form-control" type="text" name="name"></p>
+                            <p class="Form-text">Name: <input class="form-control Opaque" type="text" name="name"></p>
                             <p class="Form-text">Username: <input class="form-control" type="text" name="username"></p>
                             <p class="Form-text">Password: <input class="form-control" type="password" name="password"></p>
-                            <p class="Form-text font-italic ml-4">*Password should be at least 8 characters</p>
+                            <p class="Form-subtext font-italic">*Password should be at least 8 characters</p>
                             <p class="Form-text">Confirm Password: <input class="form-control" type="password" name="confirm_pw"></p>
-                            <div class="text-center"><input type="submit" value="Register!" class="btn btn-warning w-75" style="font: 2rem 'Markazi Text', serif"></div>
+                            <div class="waves-effect waves-circle text-center"><input type="submit" value="Register!" class="btn btn-warning w-75" style="font: 2rem 'Markazi Text', serif"></div>
                         </form>
                     </div>
                 </div>
             </div>
             <div class="col-6">
-                <div class="card">
+                <div class="Shadow card">
                     <div class="card-body">
                         <h1 class="Heading">Login</h1>
                         <form action="/login/" method="POST"> 
                         {% csrf_token %}
                             <p class="Form-text">Username: <input class="form-control" type="text" name="username"></p>
                             <p class="Form-text">Password: <input class="form-control" type="password" name="password"></p>
-                            <div class="text-center"><input type="submit" value="Login!" class="btn btn-warning w-75" style="font: 2rem 'Markazi Text', serif"></div>
+                            <div class="waves-effect waves-circle text-center"><input type="submit" value="Login!" class="btn btn-warning w-75" style="font: 2rem 'Markazi Text', serif"></div>
                         </form>
                     </div>
                 </div>
@@ -56,3 +64,5 @@
     </div>
 </body>
 </html>
+
+

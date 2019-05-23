@@ -2,7 +2,9 @@ from django.db import models
 import bcrypt
 from datetime import date, datetime
 
-# Create your models here.
+# TODO
+    # Users can also post messages to other users and comment on each trip.  
+
 
 class UserManager(models.Manager):
     def registration_validator(self, postData):
@@ -48,6 +50,16 @@ class TripManager(models.Manager):
             errors['dates'] = 'The end of your trip cannot be prior to the start of your trip!'
         return errors
 
+class CommentManager(models.Manager):
+    def comment_validator(self, postData, this_trip, this_user, users_on_trip):
+        errors = {}
+        if not this_user in users_on_trip:
+            errors['user'] = 'You must join the trip before posting comments!'
+        if len(postData['body']) < 1:
+            errors['body'] = 'Comments cannot be blank!'
+        return errors
+
+
 class User(models.Model):
     name = models.CharField(max_length=255)
     username = models.CharField(max_length=255)
@@ -66,3 +78,21 @@ class Trip(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = TripManager()
+
+class Comment(models.Model):
+    body = models.TextField(max_length=1000)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='comments')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = CommentManager()
+
+# Manager class for comments
+    # only people who've joined the trip may leave comments
+    # allow trip planner to remove comments
+        # and remove people...
+
+
+
+# TODO 
+    # send messages between users

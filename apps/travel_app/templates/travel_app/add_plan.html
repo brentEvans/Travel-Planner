@@ -1,45 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'travel_app/css/style.css' %}"> 
+    <link rel="stylesheet" href="{% static 'travel_app/css/style.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Markazi+Text|Tangerine" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Abril+Fatface|Anton|Archivo+Black|Bree+Serif|Fredoka+One&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-    <div class="container">
+    <div class="Container">
         <div class="Menu navbar">
-            <div class="mb-0">Travel Planner</div>
-            <div class="mr-5"><a href="/travels">Home</a></div> 
+            <div class="Logo">Travel Planner</div>
+            <div class="mr-5"><a href="/travels">Home</a></div>
             <div><a href="/logout">Logout!</a></div>
         </div>
+
         {% if messages %}
+        <div class="Error-bg Add-error">
             {% for message in messages %}
-            <p class="text-danger text-center">{{ message }}</p>
+                <p class="Error-message">{{ message }}</p>
             {% endfor %}
+        </div>
         {% endif %}
 
-
-        <div class="col-6 offset-3 Add-form">
-            <h1 class="Add-head">Add a Trip</h1>
-            <form action="/travels/add/validate/" method="POST"> 
-            {% csrf_token %}
-                <p class="Form-text">Destination: <input class="form-control" type="text" name="destination"></p>
-                <p class="Form-text">Description: <input class="form-control" type="text" name="plan"></p>
-                <p class="Form-text">Travel Date From: <input class="form-control" type="date" name="travel_start_date"></p>
-                <p class="Form-text">Travel Date To: <input class="form-control" type="date" name="travel_end_date"></p>
-                <div class="text-center"><input type="submit" value="Add Trip to Planner!" class="btn btn-warning w-75 mb-3" style="font: 2rem 'Markazi Text', serif"></div>
-            </form>
+        <div id="Fade-3">
+            <div class="col-6 offset-3 Add-form Shadow col">
+                <h1 class="Add-head">Add a Trip</h1>
+                <form action="/travels/add/validate/" method="POST">
+                    {% csrf_token %}
+                    <p class="Form-text">Destination: <input class="form-control" type="text" name="destination"></p>
+                    <p class="Form-text">Description: <input class="form-control" type="text" name="plan"></p>
+                    <p class="Form-text">Travel Date From: <input class="form-control" type="date"
+                            name="travel_start_date"></p>
+                    <p class="Form-text">Travel Date To: <input class="form-control" type="date" name="travel_end_date">
+                    </p>
+                    <div class="text-center"><input type="submit" value="Add Trip to Planner!"
+                            class="btn btn-warning w-75 mb-3" style="font: 2rem 'Markazi Text', serif"></div>
+                </form>
+            </div>
         </div>
-
     </div>
 </body>
+
 </html>
-
-
-
-
