@@ -175,9 +175,9 @@
 
 .dropbtn {
     background-color: inherit;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
+    /* padding: 16px; */
+    font: 1.5rem 'Abril Fatface', cursive;
+    /* font-size: 16px; */
     border: none;
 }
 .dropdown {
