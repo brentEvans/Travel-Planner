@@ -14,10 +14,8 @@
 <link
     href="https://fonts.googleapis.com/css?family=Abril+Fatface|Anton|Archivo+Black|Bree+Serif|Fredoka+One&display=swap"
     rel="stylesheet">
-
 <body>
     <div class="Container">
-
         <div class="Menu navbar">
             <div class="Logo">Travel Planner</div>
             <div class="dropdown">
@@ -59,22 +57,18 @@
                 </div>
             </div>
 
-
-
-
             <div class="col-10 offset-1 Shadow card Comment-section">
                 <div>
                     <h1 class="Comment-head">Joining this trip? Leave a comment below!</h1>
 
                     <form action='/travels/destination/{{ this_trip.id }}/validate_comment' method="POST">
-                        <!-- is this link correct? -->
                         {% csrf_token %}
                         <p class="Form-text Markazi-sm">Message: <textarea name='body'
                                 class='form-control form-control-lg' rows='2'></textarea></p>
                         {% if messages %}
                         <div class="Error-bg Comment-error">
                             {% for message in messages %}
-                                <p class="Error-message">{{ message }}</p>
+                            <p class="Error-message">{{ message }}</p>
                             {% endfor %}
                         </div>
                         {% endif %}
@@ -92,7 +86,6 @@
                     {% endfor %}
                 </div>
             </div>
-
         </div>
 </body>
 

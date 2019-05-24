@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'travel_app/css/style.css' %}"> 
+    <link rel="stylesheet" href="{% static 'travel_app/css/style.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Markazi+Text|Tangerine" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Anton|Archivo+Black|Bree+Serif|Fredoka+One&display=swap" rel="stylesheet">
-
+    <link
+        href="https://fonts.googleapis.com/css?family=Abril+Fatface|Anton|Archivo+Black|Bree+Serif|Fredoka+One&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <div class="Container">
         <div class="Menu navbar">
@@ -24,7 +27,6 @@
                 </div>
             </div>
         </div>
-
         <div id="Fade-3">
             <h1 class="Heading White mt-3">Hello, {{ request.session.logged_in_user_name }}!</h1>
             <p class="Markazi-md White">Your Trip Schedules:</p>
@@ -35,7 +37,7 @@
                     <th>Travel End Date</th>
                     <th>Plan</th>
                 </tr>
-                {% for trip in this_user_trips %} 
+                {% for trip in this_user_trips %}
                 <tr>
                     <td><a class="Link" href="/travels/destination/{{ trip.id }}">{{ trip.destination }}</a></td>
                     <td>{{ trip.travel_start_date }}</td>
@@ -44,9 +46,10 @@
                 </tr>
                 {% endfor %}
             </table>
-
-            <br><br><div class="text-center"><a class="btn btn-warning w-50" href="/travels/add/"><div class="Markazi-md">Add Travel Plan!</div></a></div><br><br>
-
+            <br><br>
+            <div class="text-center"><a class="btn btn-warning w-50" href="/travels/add/">
+                    <div class="Markazi-md">Add Travel Plan!</div>
+                </a></div><br><br>
             <p class="Markazi-md White">Trips to Join:</p>
             <table class="Trip-table table">
                 <tr>
@@ -56,18 +59,18 @@
                     <th>Travel End Date</th>
                     <th>Do you want to join?</th>
                 </tr>
-                {% for trip in all_trips_ex_user %} 
+                {% for trip in all_trips_ex_user %}
                 <tr>
                     <td>{{ trip.planned_by.name }}</td>
                     <td><a class="Link" href="/travels/destination/{{ trip.id }}">{{ trip.destination }}</a></td>
                     <td>{{ trip.travel_start_date }}</td>
                     <td>{{ trip.travel_start_date }}</td>
-                    <td><a class="btn btn-primary" href="/travels/join/{{ trip.id }}">Join Trip!</a></td> 
+                    <td><a class="btn btn-primary" href="/travels/join/{{ trip.id }}">Join Trip!</a></td>
                 </tr>
                 {% endfor %}
             </table>
-
         </div>
     </div>
 </body>
+
 </html>
