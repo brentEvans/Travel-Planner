@@ -2,10 +2,6 @@ from django.db import models
 import bcrypt
 from datetime import date, datetime
 
-# TODO
-    # Users can also post messages to other users and comment on each trip.  
-
-
 class UserManager(models.Manager):
     def registration_validator(self, postData):
         errors = {}
@@ -59,7 +55,6 @@ class CommentManager(models.Manager):
             errors['body'] = 'Comments cannot be blank!'
         return errors
 
-
 class User(models.Model):
     name = models.CharField(max_length=255)
     username = models.CharField(max_length=255)
@@ -86,13 +81,3 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = CommentManager()
-
-# Manager class for comments
-    # only people who've joined the trip may leave comments
-    # allow trip planner to remove comments
-        # and remove people...
-
-
-
-# TODO 
-    # send messages between users

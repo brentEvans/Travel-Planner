@@ -26,7 +26,6 @@
                 </div>
             </div>
         </div>
-
         <div id="Fade-3">
             <div class="row Dest">
                 <div class="col-6">
@@ -44,8 +43,7 @@
                 </div>
                 <div class="col-6">
                     <div class="Shadow card">
-                        <div class="Blue Dest-col card-body">
-
+                        <div class="Dest-col card-body">
                             <h3 class="Dest-head-sm">Other Users Joining this Trip:</h3>
                             {% for user in this_trip_users %}
                             {% if user != this_trip_planner %}
@@ -56,11 +54,9 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-10 offset-1 Shadow card Comment-section">
                 <div>
                     <h1 class="Comment-head">Joining this trip? Leave a comment below!</h1>
-
                     <form action='/travels/destination/{{ this_trip.id }}/validate_comment' method="POST">
                         {% csrf_token %}
                         <p class="Form-text Markazi-sm">Message: <textarea name='body'
@@ -88,5 +84,4 @@
             </div>
         </div>
 </body>
-
 </html>

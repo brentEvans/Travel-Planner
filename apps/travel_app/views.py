@@ -3,8 +3,6 @@ from .models import *
 from django.contrib import messages
 import bcrypt
 import logging 
-# logger = logging.getLogger(trip_planner/apps/travel_app/views)
-# logging.basicConfig(filename='test.log', level=logging.DEBUG)
 
 def index(request):
     return render(request, 'travel_app/index.html')
@@ -37,44 +35,18 @@ def validate_login(request):
         request.session['logged_in_user_id'] = this_user.id 
         request.session['logged_in_user_name'] = this_user.name
         request.session['logged_in_user_username'] = this_user.username
-
-
         return redirect('/travels')
 
 def travels(request):
-
-
-
-    # print("*"*100)
-    # print(request.session['logged_in_user_id']) 
-    # print("*"*100)
-
-    # try:
-    #     request.session['logged_in_user_id']
-    # except KeyError:
-    #     this_user = User.objects.get(id=6)                # change id to match deployed Test User object id
-    #     request.session['logged_in_user_id'] = this_user.id
-    #     request.session['logged_in_user_name'] = this_user.name
-    #     request.session['logged_in_user_username'] = this_user.username
-    #     context = {
-    #         'this_user_trips': Trip.objects.filter(users_on_trip=this_user.id),       # change id to match deployed Test User object id
-    #         'all_trips_ex_user': Trip.objects.exclude(users_on_trip=this_user.id),       # change id to match deployed Test User object id
-    #     }
-    # else:
-    #     this_user = User.objects.get(id=request.session['logged_in_user_id']) 
-    #     context = {
-    #         'this_user_trips': Trip.objects.filter(users_on_trip=this_user.id),
-    #         'all_trips_ex_user': Trip.objects.exclude(users_on_trip=this_user.id),
-    #     }
-
+    # if user tries to hit this route without being logged in, log in as default user 
     if 'logged_in_user_id' not in request.session:
-        this_user = User.objects.get(id=6)                # change id to match deployed Test User object id
+        this_user = User.objects.get(id=6)
         request.session['logged_in_user_id'] = this_user.id
         request.session['logged_in_user_name'] = this_user.name
         request.session['logged_in_user_username'] = this_user.username
         context = {
-            'this_user_trips': Trip.objects.filter(users_on_trip=this_user.id),       # change id to match deployed Test User object id
-            'all_trips_ex_user': Trip.objects.exclude(users_on_trip=this_user.id),       # change id to match deployed Test User object id
+            'this_user_trips': Trip.objects.filter(users_on_trip=this_user.id), 
+            'all_trips_ex_user': Trip.objects.exclude(users_on_trip=this_user.id),
         }
     else:
         this_user = User.objects.get(id=request.session['logged_in_user_id']) 
@@ -82,16 +54,7 @@ def travels(request):
             'this_user_trips': Trip.objects.filter(users_on_trip=this_user.id),
             'all_trips_ex_user': Trip.objects.exclude(users_on_trip=this_user.id),
         }
-
     return render(request, 'travel_app/user_page.html', context)
-
-
-
-
-
-
-
-
 
 def join_trip(request, number):
     this_user = User.objects.get(id=request.session['logged_in_user_id'])
@@ -128,10 +91,6 @@ def logout(request):
     request.session.clear()
     return redirect('/')
 
-
-
-
-
 def validate_comment(request, number):
     this_user = User.objects.get(id=request.session['logged_in_user_id'])
     this_trip = Trip.objects.get(id=number)
@@ -140,10 +99,7 @@ def validate_comment(request, number):
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect(f'/travels/destination/{number}')    # does this work?
+        return redirect(f'/travels/destination/{number}')
     else:
         this_comment = Comment.objects.create(body=request.POST['body'], user=this_user, trip=this_trip)
-        return redirect(f'/travels/destination/{number}')    # does this work?
-
-
-
+        return redirect(f'/travels/destination/{number}')
