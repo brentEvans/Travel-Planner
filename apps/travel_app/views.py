@@ -38,14 +38,12 @@ def validate_login(request):
         request.session['logged_in_user_name'] = this_user.name
         request.session['logged_in_user_username'] = this_user.username
 
-        logger.debug('hitting the WRONG route')
 
         return redirect('/travels')
 
 def travels(request):
 
 
-    logger.debug('hitting the RIGHT route')
 
     # print("*"*100)
     # print(request.session['logged_in_user_id']) 
