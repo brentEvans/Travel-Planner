@@ -42,7 +42,7 @@ def validate_login(request):
 def travels(request):
     # TODO
         # figure out what Test User's id is on deployed site and update!
-        logging('hitting the RIGHT route')
+    logging('hitting the RIGHT route')
 
     # print("*"*100)
     # print(request.session['logged_in_user_id']) 
