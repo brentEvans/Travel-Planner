@@ -34,6 +34,9 @@ def validate_login(request):
         request.session['logged_in_user_id'] = this_user.id 
         request.session['logged_in_user_name'] = this_user.name
         request.session['logged_in_user_username'] = this_user.username
+        print("*"*100)
+        print(this_user.id) 
+        print("*"*100)
         return redirect('/travels')
 
 def travels(request):
@@ -47,7 +50,7 @@ def travels(request):
     try:
         request.session['logged_in_user_id']
     except KeyError:
-        this_user = User.objects.get(id=4)                # change id to match deployed Test User object id
+        this_user = User.objects.get(id=6)                # change id to match deployed Test User object id
         request.session['logged_in_user_id'] = this_user.id
         request.session['logged_in_user_name'] = this_user.name
         request.session['logged_in_user_username'] = this_user.username
