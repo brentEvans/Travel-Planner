@@ -44,7 +44,7 @@ def travels(request):
         # figure out what Test User's id is on deployed site and update!
 
     print("*"*100)
-    print(request.session['logged_in_user_id']) 
+    # print(request.session['logged_in_user_id']) 
     print("*"*100)
 
     try:
