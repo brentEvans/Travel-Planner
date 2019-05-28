@@ -3,7 +3,7 @@ from .models import *
 from django.contrib import messages
 import bcrypt
 import logging 
-from django.conf import settings 
+logger = logging.getLogger(trip_planner/apps/travel_app/views)
 
 def index(request):
     return render(request, 'travel_app/index.html')
@@ -36,13 +36,13 @@ def validate_login(request):
         request.session['logged_in_user_id'] = this_user.id 
         request.session['logged_in_user_name'] = this_user.name
         request.session['logged_in_user_username'] = this_user.username
-        logging.debug('hitting the WRONG route')
+        logger.warning('hitting the WRONG route')
         return redirect('/travels')
 
 def travels(request):
     # TODO
         # figure out what Test User's id is on deployed site and update!
-    logging('hitting the RIGHT route')
+    logger.warning('hitting the RIGHT route')
 
     # print("*"*100)
     # print(request.session['logged_in_user_id']) 
