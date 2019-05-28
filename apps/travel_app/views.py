@@ -16,6 +16,9 @@ def validate_registration(request):
         hash1 = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
         this_user = User.objects.create(name=request.POST['name'], username=request.POST['username'], password=hash1.decode())
         request.session['logged_in_user_id'] = this_user.id 
+        print("*"*100)
+        print(this_user.id) 
+        print("*"*100)
         request.session['logged_in_user_name'] = this_user.name
         request.session['logged_in_user_username'] = this_user.username
         return redirect('/travels')
@@ -38,7 +41,7 @@ def travels(request):
         # figure out what Test User's id is on deployed site and update!
 
     print("*"*100)
-    # print(request.session['logged_in_user_id']) 
+    print(request.session['logged_in_user_id']) 
     print("*"*100)
 
     try:
