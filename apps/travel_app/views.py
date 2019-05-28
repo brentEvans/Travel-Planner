@@ -36,7 +36,7 @@ def validate_login(request):
         request.session['logged_in_user_username'] = this_user.username
         return redirect('/travels')
 
-def travels(request):
+def travels(request): 
     # TODO
         # figure out what Test User's id is on deployed site and update!
 
