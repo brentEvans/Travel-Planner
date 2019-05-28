@@ -47,7 +47,7 @@ def travels(request):
     try:
         request.session['logged_in_user_id']
     except KeyError:
-        this_user = User.objects.get(id=12)                # change id to match deployed Test User object id
+        this_user = User.objects.get(id=3)                # change id to match deployed Test User object id
         request.session['logged_in_user_id'] = this_user.id
         request.session['logged_in_user_name'] = this_user.name
         request.session['logged_in_user_username'] = this_user.username
