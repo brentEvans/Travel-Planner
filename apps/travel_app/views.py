@@ -34,15 +34,57 @@ def validate_login(request):
         return redirect('/travels')
 
 def travels(request):
-    this_user = User.objects.get(id=request.session['logged_in_user_id']) 
-    context = {
-        'this_user_trips': Trip.objects.filter(users_on_trip=this_user.id),
-        'all_trips_ex_user': Trip.objects.exclude(users_on_trip=this_user.id),
-    }
-    this_user_trips = Trip.objects.filter(users_on_trip=this_user.id)
-    print('*'*100)
-    print(this_user_trips)
+    # TODO
+        # figure out what Test User's id is on deployed site and update!
+
+    print("*"*100)
+    # print(request.session['logged_in_user_id']) 
+    print("*"*100)
+
+    try:
+        request.session['logged_in_user_id']
+    except KeyError:
+        this_user = User.objects.get(id=12)                # change id to match deployed Test User object id
+        request.session['logged_in_user_id'] = this_user.id
+        request.session['logged_in_user_name'] = this_user.name
+        request.session['logged_in_user_username'] = this_user.username
+        context = {
+            'this_user_trips': Trip.objects.filter(users_on_trip=this_user.id),       # change id to match deployed Test User object id
+            'all_trips_ex_user': Trip.objects.exclude(users_on_trip=this_user.id),       # change id to match deployed Test User object id
+        }
+    else:
+        this_user = User.objects.get(id=request.session['logged_in_user_id']) 
+        context = {
+            'this_user_trips': Trip.objects.filter(users_on_trip=this_user.id),
+            'all_trips_ex_user': Trip.objects.exclude(users_on_trip=this_user.id),
+        }
+
+    # if (not request.session['logged_in_user_id'] ):
+    #     this_user = User.objects.get(id=12)                # change id to match deployed Test User object id
+    #     request.session['logged_in_user_id'] = this_user.id
+    #     request.session['logged_in_user_name'] = this_user.name
+    #     request.session['logged_in_user_username'] = this_user.username
+    #     context = {
+    #         'this_user_trips': Trip.objects.filter(users_on_trip=12),       # change id to match deployed Test User object id
+    #         'all_trips_ex_user': Trip.objects.exclude(users_on_trip=12),       # change id to match deployed Test User object id
+    #     }
+    # else:
+    #     this_user = User.objects.get(id=request.session['logged_in_user_id']) 
+    #     context = {
+    #         'this_user_trips': Trip.objects.filter(users_on_trip=this_user.id),
+    #         'all_trips_ex_user': Trip.objects.exclude(users_on_trip=this_user.id),
+    #     }
+    # print('*'*100)
+    # print(this_user_trips)
     return render(request, 'travel_app/user_page.html', context)
+
+
+
+
+
+
+
+
 
 def join_trip(request, number):
     this_user = User.objects.get(id=request.session['logged_in_user_id'])
@@ -96,9 +138,5 @@ def validate_comment(request, number):
         this_comment = Comment.objects.create(body=request.POST['body'], user=this_user, trip=this_trip)
         return redirect(f'/travels/destination/{number}')    # does this work?
 
-
-
-# TODO
-    # show comments on destination page
 
 
